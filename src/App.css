@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #0e0f10;
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.HomeNavBar{
+  text-decoration: none;
+  color: black;
+  padding:1em;
+}
+
+.HomeNavBar:hover{
+  text-decoration: none;
+  color: gray;
 }

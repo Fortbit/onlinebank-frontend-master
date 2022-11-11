@@ -51,7 +51,7 @@ export const Newfd = () => {
             <Input
               id="fromaccount"
               name="fromaccount"
-              placeholder="fromaccount"
+              placeholder="From Account"
               value={fromaccount}
               onChange={(e)=>{
                 setfromaccount(e.target.value);
@@ -72,7 +72,7 @@ export const Newfd = () => {
             <Input
               id="amount"
               name="amount"
-              placeholder="amount"
+              placeholder="Amount"
               value={amount}
               onChange={(e)=>{
                 setamount(e.target.value);
@@ -92,7 +92,7 @@ export const Newfd = () => {
           <Col sm={9} lg={4}>
            
             <select id="fdperiod" onChange={(e)=>setfdperiod(e.target.value)} style={{width:"100%",padding:"7px",borderRadius:"5px"}}>
-                    <option value="select fdperiod">select a fdperiod</option>
+                    <option value="select fdperiod">Select FD Period</option>
                     <option value="1 years" >1 years</option>
                     <option value="3 years">3 years</option>
                     <option value="5 years">5 years</option>
@@ -113,7 +113,7 @@ export const Newfd = () => {
 
           <Col sm={9} lg={4}>
           <select id="fdproduct" onChange={(e)=>setfdproduct(e.target.value)} style={{width:"100%",padding:"7px",borderRadius:"5px"}}>
-                    <option value="fdproduct">fdproduct</option>
+                    <option value="fdproduct">FD Product</option>
                     <option value="current account" >current account</option>
                     <option value="savings account">savings account</option>
                     <option value="business account">business account</option>

@@ -21,7 +21,6 @@ const Event = () => {
     const [address, setaddress] = useState("");
     const [mobileno, setmobileno] = useState("");
     const [emailid, setemailid] = useState("");
-    const [gender, setgender] = useState("");
     const [event,setevent] = useState("");
     
     
@@ -109,24 +108,7 @@ const Event = () => {
           </Col>
           <Col lg={3}></Col>
         </FormGroup>
-        <FormGroup row>
-          <Col lg={3}></Col>
-          <Label for="gender" sm={3} lg={2}>
-          Gender
-          </Label>
-
-          <Col sm={9} lg={4}>
-           
-            <select id="gender" onChange={(e)=>setgender(e.target.value)} style={{width:"40%",padding:"8px",borderRadius:"9px"}}>
-                    <option value="select a gender">Select Gender</option>
-                    <option value="Male" >Male</option>
-                    <option value="Female">Female</option>
-                    <option value="other">other</option>
-
-              </select>
-          </Col>
-          <Col lg={3}></Col>
-        </FormGroup>
+        
         
         
         

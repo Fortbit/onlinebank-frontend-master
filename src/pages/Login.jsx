@@ -1,82 +1,98 @@
-import { useState } from "react";
-import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-import loginservice from "../service/loginservice";
-
-const defaultState = {
-	username: "",
-	password: "",
-};
+import React,{useState,useEffect} from 'react'
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Col,
+  Button,
+} from "reactstrap";
 
 export const Login = () => {
-	const [userData, setUserData] = useState(defaultState);
+  const navigate = useNavigate();
+    const [accountnumber, setaccountnumber] = useState();
+    const [password, setpassword] = useState("");
 
-	const handleChange = (event) => {
-		setUserData((prev) => {
-			return { ...prev, [event.target.name]: event.target.value };
-		});
-	};
+    const loginHandler = (e) => {
+      e.preventDefault();
+      const lg = JSON.stringify({accountNumber: accountnumber, password });
 
-	const submitHandler = (event) => {
-		event.preventDefault();
+	  console.log(lg)
 
-		// submit form api
+	  const options = {
+		headers: {"content-type": "application/json"}
+		}
 
-		setUserData(defaultState);
-	};
+	fetch("http://localhost:8085/softbank/login", {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "*/*"
+		},
+		body: lg
+	}).then((response) => response.json())
+	.then((responseJson) => {
+		alert("Login Successfull");
+         navigate("/menu");
+	})
+     };
+    
 
-	return (
-		<Container className="p-3">
-			Login Here
-			<Container className="p-5 mb-4 bg-light rounded-3">
-				<form onSubmit={(e) => submitHandler(e)}>
-					<div className="mb-3 d-flex align-items-center justify-content-around">
-						<label className="form-label" htmlFor="username">
-							Username
-						</label>
+  return (
+    <Container className="p-4">
+        <h2 className="text-center py-3">Login</h2>
+      
+      <Form onSubmit={loginHandler}>
+        <FormGroup row>
+          <Col lg={3}></Col>
+          <Label for="accountnumber" sm={3} lg={2}>
+          Account Number
+          </Label>
+          <Col sm={9} lg={4}>
+            <Input
+              id="accountnumber"
+              name="accountnumber"
+              placeholder="Enter Account Number"
+              value={accountnumber}
+              onChange={(e)=>{
+                setaccountnumber(e.target.value);
+              }}
+              type="text"
+            />
+          </Col>
+          <Col lg={3}></Col>
+        </FormGroup>
 
-						<input
-							type="text"
-							style={{ maxWidth: "80%" }}
-							className="form-control"
-							id="username"
-							name="username"
-							placeholder="enter your username"
-							onChange={(e) => handleChange(e)}
-							value={userData.username}
-						/>
-					</div>
-					<div className="mb-3 d-flex align-items-center justify-content-around">
-						<label className="form-label" htmlFor="password">
-							Password
-						</label>
+		<FormGroup row>
+          <Col lg={3}></Col>
+          <Label for="password" sm={3} lg={2}>
+          Password
+          </Label>
 
-						<input
-							type="password"
-							style={{ maxWidth: "80%" }}
-							className="form-control"
-							id="password"
-							name="password"
-							placeholder="enter your password"
-							onChange={(e) => handleChange(e)}
-							value={userData.password}
-						/>
-					</div>
-					<div className="d-flex flex-column">
-						<button
-							type="button"
-							className="btn btn-primary mx-auto"
-							onClick={(e) => submitHandler(e)}
-						>
-							SignIn
-						</button>
-						<button type="button" className="btn btn-link mx-auto">
-							<Link to="/register"> New User ? Signup </Link>
-						</button>
-					</div>
-				</form>
-			</Container>
-		</Container>
-	);
-};
+          <Col sm={9} lg={4}>
+            <Input
+              id="password"
+              name="password"
+              placeholder="Enter your Password"
+              value={password}
+              onChange={(e)=>{
+                setpassword(e.target.value);
+              }}
+              type="text"
+            />
+          </Col>
+          <Col lg={3}></Col>
+        </FormGroup>
+
+        <FormGroup check row>
+          <Col className="d-flex justify-content-center">
+            <Button onClick={loginHandler}>Log In</Button>
+          </Col>
+        </FormGroup>
+      </Form>
+    </Container>
+  )
+}
